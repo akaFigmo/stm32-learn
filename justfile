@@ -1,8 +1,8 @@
 objdump:
-    cargo objdump -- -h target/thumbv7em-none-eabihf/debug/stm32-learn
+    cargo objdump --bin stm32-learn -- -h
 
 readobj:
-    cargo readobj -- -S target/thumbv7em-none-eabihf/debug/stm32-learn
+    cargo readobj --bin stm32-learn -- -x .text
 
 build:
     cargo clean
