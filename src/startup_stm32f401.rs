@@ -1,3 +1,13 @@
+use core::ptr::{addr_of_mut, addr_of};
+
+unsafe extern "C" {
+    static _sidata: u32;
+    static mut _sdata: u32;
+    static mut _edata: u32;
+    static mut _sbss: u32;
+    static mut _ebss: u32;
+}
+
 #[unsafe(no_mangle)]
 extern "C" fn HardFault_Handler() {
     loop {} 
@@ -10,6 +20,24 @@ extern "C" fn NMI_Handler() {
 
 #[unsafe(no_mangle)]
 extern "C" fn Reset_Handler() {
+    unsafe {
+        let mut src_is_flash = addr_of!(_sidata);
+        let mut dest_is_ram = addr_of_mut!(_sdata);
+        let data_end_in_ram = addr_of_mut!(_edata);
+
+        while dest_is_ram < data_end_in_ram {
+            *dest_is_ram = *src_is_flash;
+            dest_is_ram = dest_is_ram.add(1);
+            src_is_flash = src_is_flash.add(1);
+        }
+
+        let mut bss = addr_of_mut!(_sbss);
+        let bss_end = addr_of_mut!(_ebss);
+        while bss < bss_end {
+            *bss = 0;
+            bss = bss.add(1);
+        }
+    }
     crate::main();
 }
 
