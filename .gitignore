@@ -1,1 +1,12 @@
+# Build Artifacts
 /target
+
+# VSCode Settings
+# You might need to tweak settings.json to avoid
+# rust-analyzer false positives.
+# {
+#    "rust-analyzer.cargo.target": "thumbv7em-none-eabihf",
+#    "rust-analyzer.check.allTargets": false
+# }
+.vscode/
+
