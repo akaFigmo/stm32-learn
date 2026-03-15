@@ -27,7 +27,7 @@ fn main() -> ! {
 
 
 #[panic_handler]
-fn panic_handler(info: &PanicInfo) -> ! {
+fn panic_handler(_info: &PanicInfo) -> ! {
     loop {
     }
 }
