@@ -1,4 +1,6 @@
-ENTRY(reset_handler)
+INCLUDE "device_STM32F401.x"
+
+ENTRY(Reset_Handler)
 
 /* Define memory regions */
 MEMORY
@@ -29,7 +31,9 @@ SECTIONS
   .text :
   {
     /* here you should collect all executable code */
-    . = ALIGN(4);
+    . = ORIGIN(FLASH);
+    LONG(_start_of_stack);
+    KEEP(*(.isr_vector));
     *(.text)
     *(.text*)
     . = ALIGN(4);

@@ -10,3 +10,13 @@
 # }
 .vscode/
 
+# Stuff from ST
+# the .svd file was obtained from the STMicroelectronics_CMSIS_SVD
+# directory after installing the Cube CLI tool
+st/
+
+# Vector Gen
+# The following files were generated from the .svd using svd-vector-gen
+# Delete vector_STM32F401.txt after using in src/startup_stm32f401.rs
+device_STM32F401.x
+vector_STM32F401.txt
