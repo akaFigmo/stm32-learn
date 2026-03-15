@@ -7,3 +7,6 @@ readobj:
 build:
     cargo clean
     cargo build
+
+flash:
+    cargo flash --chip STM32F401RE
